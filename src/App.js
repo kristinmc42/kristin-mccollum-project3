@@ -40,7 +40,7 @@ function App() {
           showPartOne
           ?
           <>
-            <h2>Let's get your morning going! </h2>
+            <h2>Let's find you some tunes! </h2>
             <ArtistForm />
           </>
           : null

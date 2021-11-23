@@ -1,9 +1,10 @@
 // this component will get the user text input
 // save the input in state 
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DisplaySongs from "./DisplaySongs";
 import axios from "axios";
+import GetMoreSongs from "./GetMoreSongs";
 
 
 function ArtistForm(){
@@ -16,28 +17,23 @@ function ArtistForm(){
   // initialize useStates for displaying form and results
   const [showArtistForm, setShowArtistForm] = useState(true);
   const [showSongResults, setShowSongResults] = useState(false);
+  const [showMoreSongs, setShowMoreSongs] = useState(false);
 
   // when user types something in the input field
   const handleChange = (event) => {
     // update userInput state with the input value
     setUserInput(event.target.value);
-    console.log(event.target.value)
+    // console.log(event.target.value)
   }
 
   // when user submits form, hide the form and show the song results
   const handleSubmit = ((event) => {
     event.preventDefault();
-    setShowArtistForm(false);
-    setShowSongResults(true);
-  })
-
-
-  // call the API when the state of userInput changes
-  useEffect(() => {
+    
 
     // call API based on artist name 
     const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
-    console.log("in useEffect for API call")
+    const songResults = [];
 
     if (userInput !== null){
       axios({
@@ -55,14 +51,14 @@ function ArtistForm(){
           // make a copy of the results and save it in a variable
           const allArtistsSongs = [...response.data.toptracks.track];
     
-          console.log(allArtistsSongs)
+          // console.log(allArtistsSongs)
     
           let randomSong = {};
-          const songResults = [];
+          
     
           // pick 3 random songs from allArtistsSongs
           // save each song in an object
-          for (let index=1; index<4; index++){
+          for (let index = 1; index < 4; index++){
             randomSong = allArtistsSongs[Math.floor(Math.random() * allArtistsSongs.length)];
             
             // add artist as property of randonSong
@@ -71,10 +67,18 @@ function ArtistForm(){
             songResults.push(randomSong);
           }
           setNewSongList(songResults);
+          // console.log(randomSong)
+        
+
+          // hide artist form and show display songs
+          setShowArtistForm(false);
+          setShowSongResults(true);
+          setShowMoreSongs(true);
+        
         }
       });
     }
-  }, [userInput])
+  })
 
   return(
     <>
@@ -95,9 +99,21 @@ function ArtistForm(){
     }
     {
       showSongResults
-      ? <DisplaySongs props={newSongList}/>
+      ? (
+        <>
+        <DisplaySongs songs={newSongList}/>
+        
+        
+        </>)
       : null
     }
+    {
+      showMoreSongs
+      ? <GetMoreSongs artist={userInput}/>
+      : null
+    }
+
+  
     </>
   )
 }
