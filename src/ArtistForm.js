@@ -17,7 +17,7 @@ function ArtistForm(){
   // initialize useStates for displaying form and results
   const [showArtistForm, setShowArtistForm] = useState(true);
   const [showSongResults, setShowSongResults] = useState(false);
-  const [showMoreSongs, setShowMoreSongs] = useState(false);
+  // const [showMoreSongs, setShowMoreSongs] = useState(false);
 
   // when user types something in the input field
   const handleChange = (event) => {
@@ -59,12 +59,16 @@ function ArtistForm(){
           // pick 3 random songs from allArtistsSongs
           // save each song in an object
           for (let index = 1; index < 4; index++){
-            randomSong = allArtistsSongs[Math.floor(Math.random() * allArtistsSongs.length)];
+            const randomNumber = Math.floor(Math.random() * allArtistsSongs.length);
+            randomSong = allArtistsSongs[randomNumber];
             
             // add artist as property of randonSong
             randomSong.artist=userInput;
             // save the objects in a new array
             songResults.push(randomSong);
+
+            //remove song from allartistsSongs
+            allArtistsSongs.splice(randomNumber, 1);
           }
           setNewSongList(songResults);
           // console.log(randomSong)
@@ -73,7 +77,7 @@ function ArtistForm(){
           // hide artist form and show display songs
           setShowArtistForm(false);
           setShowSongResults(true);
-          setShowMoreSongs(true);
+          // setShowMoreSongs(true);
         
         }
       });
@@ -102,18 +106,12 @@ function ArtistForm(){
       ? (
         <>
         <DisplaySongs songs={newSongList}/>
-        
+        <GetMoreSongs artist={userInput}/>
         
         </>)
       : null
     }
-    {
-      showMoreSongs
-      ? <GetMoreSongs artist={userInput}/>
-      : null
-    }
-
-  
+    
     </>
   )
 }

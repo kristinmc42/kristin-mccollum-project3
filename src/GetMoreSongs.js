@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import DisplaySongs from "./DisplaySongs";
 
-function GetMoreSongs(artist){
+function GetMoreSongs(props){
   // call API based on artist name 
     const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
     
@@ -25,7 +25,7 @@ function GetMoreSongs(artist){
           format: "json",
           method: "artist.getsimilar",
           api_key: apiKey,
-          artist: artist.artist,
+          artist: props.artist,
           autocorrect: [0 | 1]
         }
       })
@@ -79,7 +79,7 @@ function GetMoreSongs(artist){
 
               //save random song in an array newSongList 
               newSongSuggestions.push(randomSong);
-              console.log(newSongSuggestions)
+              // console.log(newSongSuggestions)
 
               }
             })
@@ -89,7 +89,8 @@ function GetMoreSongs(artist){
         setNewSongList(newSongSuggestions);
         }
       })
-    }, [])
+     
+    }, [props])
 
   
 
