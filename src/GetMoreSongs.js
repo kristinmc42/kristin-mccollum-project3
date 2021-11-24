@@ -33,15 +33,15 @@ function GetMoreSongs({artist}){
           // make a copy of the results and save it in a variable
           const returnedListOfArtists = [...response.data.similarartists.artist];
           console.log(returnedListOfArtists)
-          let randomArtist = {};
           const randomArtistArray =[];
           // const newSongSuggestions =[];
           
-
+          
           // 🚨 🚨 I BROKE THIS - IT IS OVERWRITING SO ARRAY IS ALL THE SAME LAST OBJECT 🚨🚨
           // pick 5 random artists from similar Artists
           // save each artist in an object
           for (let index = 1; index < 6; index++){
+            let randomArtist = {};
             const randomNumber = Math.floor(Math.random() * returnedListOfArtists.length);
             randomArtist.name = returnedListOfArtists[randomNumber].name;
             randomArtist.url = returnedListOfArtists[randomNumber].url
