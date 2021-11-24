@@ -1,7 +1,7 @@
 // this component will get the user text input
 // save the input in state 
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DisplaySongs from "./DisplaySongs";
 import axios from "axios";
 import GetMoreSongs from "./GetMoreSongs";
