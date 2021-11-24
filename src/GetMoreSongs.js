@@ -99,7 +99,8 @@ function GetMoreSongs({artist}){
   return (
     
     <>
-    <p>Here are some similar artists that you might enjoy.</p>
+    <h3>Here are some similar artists that you might enjoy</h3>
+    <p>Click on their name to learn more about them at Last FM</p>
     <ul>
       {
         similarArtists.map((artist) => {

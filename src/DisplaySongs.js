@@ -2,12 +2,14 @@
 
 
 
-function DisplaySongs({songs}) {
-
+function DisplaySongs({songs, number}) {
+  const numOfSongs = number === "placeholder" ? 5 : number;
+  
+  console.log(numOfSongs)
   return(
     <ul>
       {
-        songs.map(song => {
+        songs.slice(0, numOfSongs).map(song => {
           console.log(song)
           return(
               <li key={song.playcount}>

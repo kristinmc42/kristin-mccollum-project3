@@ -1,7 +1,7 @@
 function Header (){
   return(
     <header>
-      <p>Playlist Proliferation</p>
+      <p>Song Selector</p>
       <button>Sign in</button>
     </header>
   )

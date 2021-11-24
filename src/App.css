@@ -59,7 +59,7 @@ header button{
 
 /* main styles */
 main {
-  height: 100vh;
+  min-height: 80vh;
   background-color: rgb(237, 160, 82);
 }
 
@@ -91,9 +91,21 @@ main button:hover {
 
 main h2 {
   font-size: clamp(1.7rem, 4vw, 4rem);
-  padding: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
 }
 
+main h3{
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  padding-top: 1.3rem;
+  padding-bottom: .3rem;
+}
+
+main ul{
+  list-style: none;
+}
+
+/*  form styles */
 main form {
   display: flex;
   flex-direction: column;
@@ -112,42 +124,63 @@ main form input{
   font-size: clamp(1.3rem, 2.5vw, 4rem);
 }
 
-.partOne p {
- 
+/* error message - p */
+.errorMessage {
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  padding-top: 2rem;
 }
 
-.songLink {
+
+/* capitalize artist name (user input) in header*/
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* buttons with links */
+.songLink,
+.artistLink {
   text-transform: capitalize;
   background-color: rgb(237, 160, 82);
   border: none;
   transition: background-color .7s;
 }
 
-.songLink:hover  {
+.songLink:hover,
+.artistLink:hover  {
   background-color: papayawhip;
+  border: none;
 }
 
-main ul{
-  list-style: none;
+/* reset button */
+.reset{
+  width: 250px;
+  margin: 2rem 0;
 }
+
 
 /* footer styles */
 footer {
-  position: fixed;
-  bottom: 0;
   width: 100%;
-  height: 8vh;
+  height: 10vh;
   background-color: royalblue;
 }
 
-footer p{
+footer p, button{
   text-align: center;
+  font-size: clamp(.3rem, 2.5vh, .8rem);
   font-weight: bold;
   padding: 10px;
 
 }
-footer a{
+.footerLinks{
   color: rgb(4, 4, 123);
+  background-color: royalblue;
+  border: none;
+  padding: 0;
+  transition: .8s;
+}
+.footerLinks:hover {
+  color:  sandybrown;
 }
 
 

@@ -27,8 +27,9 @@ function App() {
       <section className="intro wrapper">
         {showIntro ?
         <>
-          <h1>Playlist Proliferation</h1>
+          <h1>Song Selector</h1>
           <p>Tired of listening to the same songs by your favourite artists?</p>
+          <p>Wondering what were some of the hits by that band that you remember from way back?</p>
           <p>Wish someone would pick some random songs for you?</p>
           <p>You've come to the right place!</p>
           <button onClick={handleClick}>Let's get started!</button>
