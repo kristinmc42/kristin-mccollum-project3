@@ -19,7 +19,7 @@ function GetMoreSongs({artist}){
     useEffect(() => {
       
       axios({
-        url: "http://ws.audioscrobbler.com/2.0/",
+        url: "https://ws.audioscrobbler.com/2.0/",
         params: {
           format: "json",
           method: "artist.getsimilar",
