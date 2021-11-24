@@ -15,7 +15,7 @@ function ArtistForm(){
   const [newSongList, setNewSongList] = useState([]);
 
   // initialize useStates for displaying form and results
-  const [showArtistForm, setShowArtistForm] = useState(true);
+  // const [showArtistForm, setShowArtistForm] = useState(true);
   const [showSongResults, setShowSongResults] = useState(false);
   // const [showMoreSongs, setShowMoreSongs] = useState(false);
 
@@ -75,7 +75,7 @@ function ArtistForm(){
         
 
           // hide artist form and show display songs
-          setShowArtistForm(false);
+          // setShowArtistForm(false);
           setShowSongResults(true);
           // setShowMoreSongs(true);
         
@@ -86,31 +86,28 @@ function ArtistForm(){
 
   return(
     <>
-    {
-      showArtistForm 
-      ?  <form onSubmit={handleSubmit}>
-          <label htmlFor="artistChoice">Choose an artist</label>
-          <input 
-            type="text" 
-            id="artistChoice" 
-            value={userInput} 
-            onChange={handleChange}
-            placeholder="Taylor Swift, Coldplay, Doja Cat, BTS, Lil Nas X..."
-          />
-          <button>Submit</button>
-        </form>
-      : null
-    }
-    {
-      showSongResults
-      ? (
-        <>
-        <DisplaySongs songs={newSongList}/>
-        <GetMoreSongs artist={userInput}/>
-        
-        </>)
-      : null
-    }
+      {
+        showSongResults
+        ? (
+          <>
+          <DisplaySongs songs={newSongList}/>
+          <GetMoreSongs artist={userInput}/>
+          
+          </>)
+        : null
+      }
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="artistChoice">Choose an artist</label>
+        <input 
+          type="text" 
+          id="artistChoice" 
+          value={userInput} 
+          onChange={handleChange}
+          placeholder="Taylor Swift, Coldplay, Doja Cat, BTS, Lil Nas X..."
+        />
+        <button>Submit</button>
+      </form>
+ 
     
     </>
   )
