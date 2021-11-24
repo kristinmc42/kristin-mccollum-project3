@@ -15,7 +15,7 @@ html {
   font-size: 125%;
 }
 
-h1, h2, p, a, ul, li, button {
+h1, h2, h3, p, a, ul, li, button {
   margin: 0;
   padding: 0;
 }
@@ -59,7 +59,7 @@ header button{
 
 /* main styles */
 main {
-  height: 90%;
+  height: 100vh;
   background-color: rgb(237, 160, 82);
 }
 
@@ -70,7 +70,7 @@ h1 {
 }
 
 main p{
-  font-size: 2rem;
+  font-size: 1rem;
   padding: 10px;
 }
 
@@ -81,10 +81,16 @@ main button {
   font-weight: bold;
   padding: 10px;
   border-radius: 13px;
+  transition:  .7s;
+}
+
+main button:hover {
+  background-color: rgb(188, 169, 144); 
+  border: 5px double navy;
 }
 
 main h2 {
-  font-size: 3rem;
+  font-size: clamp(1.7rem, 4vw, 4rem);
   padding: 3rem;
 }
 
@@ -94,7 +100,7 @@ main form {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 3.5vw, 4rem);
 }
 
 main form input{
@@ -102,19 +108,21 @@ main form input{
   background-color: papayawhip;
   text-align: center;
   margin: 2rem .5rem;
+  border-radius: 10px;
+  font-size: clamp(1.3rem, 2.5vw, 4rem);
 }
 
 .partOne p {
-  text-transform: capitalize;
+ 
 }
 
 .songLink {
+  text-transform: capitalize;
   background-color: rgb(237, 160, 82);
   border: none;
-  /* transition: color .7s; */
+  transition: background-color .7s;
 }
 
-/* 🚨 HOVER NOT WORKING */
 .songLink:hover  {
   background-color: papayawhip;
 }

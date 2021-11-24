@@ -11,7 +11,7 @@ function DisplaySongs({songs}) {
           console.log(song)
           return(
               <li key={song.playcount}>
-                <p>{song.artist} ~ <button className="songLink" aria-label="on click, opens link to song details on LastFM in new tab"  onClick={() => {window.open(song.url)}}>{song.name}</button> </p>
+                <button className="songLink" aria-label="on click, opens link to song details on LastFM in new tab"  onClick={() => {window.open(song.url)}}>{song.name}</button>
               </li>
              
           )

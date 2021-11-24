@@ -15,9 +15,10 @@ function ArtistForm(){
   const [newSongList, setNewSongList] = useState([]);
 
   // initialize useStates for displaying form and results
-  // const [showArtistForm, setShowArtistForm] = useState(true);
   const [showSongResults, setShowSongResults] = useState(false);
-  // const [showMoreSongs, setShowMoreSongs] = useState(false);
+  const [showForm, setShowForm] = useState(true);
+  const [showResetButton, setShowResetButton] = useState(false);
+ 
 
   // when user types something in the input field
   const handleChange = (event) => {
@@ -30,12 +31,11 @@ function ArtistForm(){
   const handleSubmit = ((event) => {
     event.preventDefault();
     
-
     // call API based on artist name 
     const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
     const songResults = [];
 
-    if (userInput !== null){
+    if (userInput !== ""){
       axios({
         url: "http://ws.audioscrobbler.com/2.0/",
         params: {
@@ -74,15 +74,25 @@ function ArtistForm(){
           // console.log(randomSong)
         
 
-          // hide artist form and show display songs
-          // setShowArtistForm(false);
+          // show songs
           setShowSongResults(true);
-          // setShowMoreSongs(true);
-        
+          setShowForm(false);
+          setShowResetButton(true);
+
         }
       });
     }
   })
+
+  const handleReset = (event) => {
+    event.preventDefault();
+    // update userInput state with an empty string
+    setUserInput("");
+
+    setShowSongResults(false);
+    setShowForm(true);
+    setShowResetButton(false);
+  }
 
   return(
     <>
@@ -90,23 +100,36 @@ function ArtistForm(){
         showSongResults
         ? (
           <>
+          <h3>{`Here are some songs from ${userInput}`}</h3>
+          <p>Click on the song name to visit the Last FM page for that song</p>
           <DisplaySongs songs={newSongList}/>
           <GetMoreSongs artist={userInput}/>
           
           </>)
         : null
       }
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="artistChoice">Choose an artist</label>
-        <input 
-          type="text" 
-          id="artistChoice" 
-          value={userInput} 
-          onChange={handleChange}
-          placeholder="Taylor Swift, Coldplay, Doja Cat, BTS, Lil Nas X..."
-        />
-        <button>Submit</button>
-      </form>
+      {
+        showForm
+        ?
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="artistChoice">Choose an artist</label>
+          <input 
+            type="text" 
+            id="artistChoice" 
+            value={userInput} 
+            onChange={handleChange}
+            placeholder="Taylor Swift, Coldplay, Doja Cat, BTS, Lil Nas X..."
+          />
+          <button>Submit</button>
+        </form>
+        : null
+      }
+      {
+        showResetButton
+        ?
+          <button onClick={handleReset}>Reset</button>
+        : null
+      }
  
     
     </>
