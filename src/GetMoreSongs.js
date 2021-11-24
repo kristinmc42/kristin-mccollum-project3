@@ -6,18 +6,16 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import DisplaySongs from "./DisplaySongs";
+
 
 function GetMoreSongs({artist}){
-  // call API based on artist name 
-    const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
-    
-    const [similarArtists, setSimilarArtists] = useState([]);
-    // const [newSongList, setNewSongList] = useState([]);
+  const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
 
-
-    useEffect(() => {
-      
+  // initialize state for similar artist array
+  const [similarArtists, setSimilarArtists] = useState([]);
+  
+  useEffect(() => {
+      // call API based on artist name from user input     
       axios({
         url: "https://ws.audioscrobbler.com/2.0/",
         params: {
@@ -32,63 +30,32 @@ function GetMoreSongs({artist}){
         if (response.length !== 0){
           // make a copy of the results and save it in a variable
           const returnedListOfArtists = [...response.data.similarartists.artist];
-          console.log(returnedListOfArtists)
+
+          // initailize empty array that will store random artist objects
           const randomArtistArray =[];
-          // const newSongSuggestions =[];
-          
-          
        
-          // pick 5 random artists from similar Artists
+          // use for loop to pick 5 random artists from similar Artists array
           // save each artist in an object
           for (let index = 1; index < 6; index++){
+
+            // initialize variable that will hold the random artist object
             let randomArtist = {};
+
+            // pick a random artist and store name and url properties in object
             const randomNumber = Math.floor(Math.random() * returnedListOfArtists.length);
             randomArtist.name = returnedListOfArtists[randomNumber].name;
             randomArtist.url = returnedListOfArtists[randomNumber].url
 
-            // save the random artist in a new array
+            // save the random artist object in a new array
             randomArtistArray.push(randomArtist);
 
             // remove the artist from the similar artist array
             returnedListOfArtists.splice(randomNumber, 1);
-
-            console.log(randomArtistArray, randomArtist)
           }
 
-          console.log("this is the random array", randomArtistArray)
-         setSimilarArtists(randomArtistArray);
+          // update state with array of random artists
+          setSimilarArtists(randomArtistArray);
 
-          // call API for each of the artist results to get a track for each of them 
-          // for (const newArtist of randomArtistArray){
-            
-          //   axios({
-          //     url: "http://ws.audioscrobbler.com/2.0/",
-          //     params: {
-          //       format: "json",
-          //       method: "artist.gettoptracks",
-          //       api_key: apiKey,
-          //       artist: newArtist,
-          //       autocorrect: [0 | 1]
-          //     }
-          //   })
-          //   .then(response => {
-          //     if (response.length !== 0){
-          //       // make a copy of the results and save it in a variable
-          //     const allArtistsSongs = [...response.data.toptracks.track];
-          //     // pick a random track from the array
-          //     const randomSong = allArtistsSongs[Math.floor(Math.random() * allArtistsSongs.length)];
-
-          //     // add artist property with value of newArtist
-          //     randomSong.artist = newArtist;
-
-          //     //save random song in an array  
-          //     newSongSuggestions.push(randomSong);
-             
-          //     // set state adding in random song
-          //     setNewSongList([...newSongList, randomSong]);
-          //     }
-          //   })
-          // }
         }
       })   
     }, [artist])
@@ -108,9 +75,6 @@ function GetMoreSongs({artist}){
             <li key={`${artist.name}`}>
               <button className="artistLink" aria-label="on click, opens link to artist details on LastFM in new tab"  onClick={() => {window.open(artist.url)}}>{artist.name}</button>
             </li>
-
-
-
           )
         })
       }

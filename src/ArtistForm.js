@@ -28,7 +28,6 @@ function ArtistForm(){
   const handleChange = (event) => {
     // update userInput state with the input value
     setUserInput(event.target.value);
-    // console.log(event.target.value)
   }
 
   // update state when user selects a new option
@@ -40,9 +39,6 @@ function ArtistForm(){
   const handleSubmit = ((event) => {
     event.preventDefault();
 
-    // setUserInput(userInput);
-    // setUserChoice(userChoice);
-    
     // call API based on artist name 
     const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
     const songResults = [];
@@ -59,41 +55,36 @@ function ArtistForm(){
         }
       })
       .then(response => {
-        console.log(response)
 
+        // clears error message if still displayed
         setShowErrorMessage(false);
-
 
         if (response.length !== 0 && response.data.toptracks.track.length > 1){
           // make a copy of the results and save it in a variable
           const allArtistsSongs = [...response.data.toptracks.track];
-    
-          // console.log(allArtistsSongs)
-    
+          
           let randomSong = {};
           
-    
-          // pick random songs from allArtistsSongs based on number selected by user
-          // save each song in an object
-
-          console.log(userChoice)
-
-         
           for (let index = 1; index < 21; index++){
+            // pick random song from allArtistsSongs 
             const randomNumber = Math.floor(Math.random() * allArtistsSongs.length);
+
+            // save song in an object
             randomSong = allArtistsSongs[randomNumber];
             
             // add artist as property of randonSong
             randomSong.artist=userInput;
-            // save the objects in a new array
+
+            // save the object in a new array
             songResults.push(randomSong);
 
             //remove song from allartistsSongs
             allArtistsSongs.splice(randomNumber, 1);
           }
+          // update state with the song results array
           setNewSongList(songResults);
 
-          // show songs & reset button; hide form
+          // show song results & the reset button; hide input form
           setShowSongResults(true);
           setShowForm(false);
           setShowResetButton(true);
@@ -101,8 +92,10 @@ function ArtistForm(){
         }
       })
       .catch(() => {
+        // error handling displays error message and resets values of state in form
         setShowErrorMessage(true);
         setUserInput("");
+        setUserChoice("placeholder");
       });
     }
   })
@@ -126,6 +119,7 @@ function ArtistForm(){
     <>
       {
         showSongResults
+
         ? (
           <>
           <h3>Here are some songs from <span className="capitalize">{userInput}</span></h3>
@@ -134,10 +128,12 @@ function ArtistForm(){
           <GetMoreSongs artist={userInput}/>
           
           </>)
+
         : null
       }
       {
         showForm
+
         ?
         <form onSubmit={handleSubmit}>
           <label htmlFor="artistChoice">Choose an artist</label>
@@ -159,25 +155,28 @@ function ArtistForm(){
             <option value="5">Five</option>
             <option value="10">Ten</option>
             <option value="20">Twenty</option>
-            <option value={Math.ceil(Math.random() * 20)}>Surprise me!</option>
+            <option value={Math.ceil(Math.random() * 20)} aria-label="picks a random number between 1 and 20">Surprise me!</option>
           </select>
           <button>Submit</button>
         </form>
+
         : null
       }
       {
         showErrorMessage
+
         ? <p className="errorMessage">Hmm...We didn't find any results for that. Please try again</p>
+
         : null
       }
       {
         showResetButton
+
         ?
           <button onClick={handleReset} className="reset">Reset - Let's try again!</button>
+
         : null
       }
- 
-    
     </>
   )
 }
