@@ -19,7 +19,7 @@ function GetMoreSongs({artist}){
     useEffect(() => {
       
       axios({
-        url: "http://ws.audioscrobbler.com/2.0/",
+        url: "https://ws.audioscrobbler.com/2.0/",
         params: {
           format: "json",
           method: "artist.getsimilar",
@@ -37,7 +37,7 @@ function GetMoreSongs({artist}){
           // const newSongSuggestions =[];
           
           
-          // 🚨 🚨 I BROKE THIS - IT IS OVERWRITING SO ARRAY IS ALL THE SAME LAST OBJECT 🚨🚨
+       
           // pick 5 random artists from similar Artists
           // save each artist in an object
           for (let index = 1; index < 6; index++){
