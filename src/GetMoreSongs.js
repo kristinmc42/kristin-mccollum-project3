@@ -11,8 +11,9 @@ import { useState, useEffect } from "react";
 function GetMoreSongs({artist}){
   const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
 
-  // initialize state for similar artist array
+  // initialize state for similar artist array and show similar artists
   const [similarArtists, setSimilarArtists] = useState([]);
+  const [showSimilarArtistNames, setShowSimilarArtistNames] = useState(false);
   
   useEffect(() => {
       // call API based on artist name from user input     
@@ -27,7 +28,8 @@ function GetMoreSongs({artist}){
         }
       })
       .then(response => {
-        if (response.length !== 0){
+       
+        if (response.length !== 0 && response.data.similarartists.artist.length > 0){
           // make a copy of the results and save it in a variable
           const returnedListOfArtists = [...response.data.similarartists.artist];
 
@@ -44,7 +46,8 @@ function GetMoreSongs({artist}){
             // pick a random artist and store name and url properties in object
             const randomNumber = Math.floor(Math.random() * returnedListOfArtists.length);
             randomArtist.name = returnedListOfArtists[randomNumber].name;
-            randomArtist.url = returnedListOfArtists[randomNumber].url
+            randomArtist.url = returnedListOfArtists[randomNumber].url;
+            randomArtist.key = returnedListOfArtists[randomNumber].mbid;
 
             // save the random artist object in a new array
             randomArtistArray.push(randomArtist);
@@ -55,40 +58,40 @@ function GetMoreSongs({artist}){
 
           // update state with array of random artists
           setSimilarArtists(randomArtistArray);
-
+          setShowSimilarArtistNames(true);
         }
-      })   
+      })
+      .catch((error) => {
+        console.log(error);
+      })  
     }, [artist])
 
   
 
 
   return (
-    
     <>
-    <h3>Here are some similar artists that you might enjoy</h3>
-    <p>Click on their name to learn more about them at Last FM</p>
-    <ul>
-      {
-        similarArtists.map((artist) => {
-          return(
-            <li key={`${artist.name}`}>
-              <button className="artistLink" aria-label="on click, opens link to artist details on LastFM in new tab"  onClick={() => {window.open(artist.url)}}>{artist.name}</button>
-            </li>
-          )
-        })
-      }
-    </ul>
+    {
+      showSimilarArtistNames
+      ?
+      <>
+      <h3>Here are some similar artists that you might enjoy</h3>
+      <p>Click on their name to learn more about them at Last FM</p>
+      <ul>
+        {
+          similarArtists.map((artist, index) => {
+            return(
+              <li key={`${artist.name}${index}`}>
+                <button className="artistLink" aria-label="on click, opens link to artist details on LastFM in new tab"  onClick={() => {window.open(artist.url)}}>{artist.name}</button>
+              </li>
+            )
+          })
+        }
+      </ul>
+      </>
+      :null
+    }
 
-
-
-
-
-
-    {/* <DisplaySongs songs={newSongList} />
-   */}
-       
-      
     </>
   )
 }

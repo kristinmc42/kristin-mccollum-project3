@@ -51,11 +51,10 @@ function ArtistForm(){
           method: "artist.gettoptracks",
           api_key: apiKey,
           artist: userInput,
-          autocorrect: [0 | 1]
+          // autocorrect: [0 | 1]
         }
       })
       .then(response => {
-
         // clears error message if still displayed
         setShowErrorMessage(false);
 
@@ -136,7 +135,7 @@ function ArtistForm(){
 
         ?
         <form onSubmit={handleSubmit}>
-          <label htmlFor="artistChoice">Choose an artist</label>
+          <label htmlFor="artistChoice">Choose an artist:</label>
           <input 
             type="text" 
             id="artistChoice" 
@@ -165,8 +164,11 @@ function ArtistForm(){
       {
         showErrorMessage
 
-        ? <p className="errorMessage">Hmm...We didn't find any results for that. Please try again</p>
-
+        ? 
+        <>
+        <p className="errorMessage">Hmm...We didn't find any results for that. </p>
+        <p className="errorMessage">Please try again.</p>
+        </>
         : null
       }
       {

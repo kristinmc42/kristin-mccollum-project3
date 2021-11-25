@@ -11,10 +11,10 @@ function DisplaySongs({songs, number}) {
   return(
     <ul>
       {
-        songs.slice(0, numOfSongs).map(song => {
+        songs.slice(0, numOfSongs).map((song, index) => {
         
           return(
-              <li key={song.playcount}>
+              <li key={`${song.playcount}${index}`}>
                 <button className="songLink" aria-label="on click, opens link to song details on LastFM in new tab"  onClick={() => {window.open(song.url)}}>{song.name}</button>
               </li>
              
