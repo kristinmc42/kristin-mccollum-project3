@@ -4,7 +4,7 @@
 import { useState } from "react";
 import DisplaySongs from "./DisplaySongs";
 import axios from "axios";
-import GetMoreSongs from "./GetMoreSongs";
+import GetSimilarArtists from "./GetSimilarArtists";
 
 
 function ArtistForm(){
@@ -40,7 +40,7 @@ function ArtistForm(){
     event.preventDefault();
 
     // call API based on artist name 
-    const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
+   
     const songResults = [];
 
     if (userInput !== ""){
@@ -49,9 +49,9 @@ function ArtistForm(){
         params: {
           format: "json",
           method: "artist.gettoptracks",
-          api_key: apiKey,
+          api_key: `${process.env.REACT_APP_API_KEY}`,
           artist: userInput,
-          // autocorrect: [0 | 1]
+          autocorrect: [0 | 1]
         }
       })
       .then(response => {
@@ -124,7 +124,7 @@ function ArtistForm(){
           <h3>Here are some songs from <span className="capitalize">{userInput}</span></h3>
           <p>Click on the song name to visit the Last FM page for that song</p>
           <DisplaySongs songs={newSongList} number={userChoice}/>
-          <GetMoreSongs artist={userInput}/>
+          <GetSimilarArtists artist={userInput}/>
           
           </>)
 
@@ -135,27 +135,32 @@ function ArtistForm(){
 
         ?
         <form onSubmit={handleSubmit}>
-          <label htmlFor="artistChoice">Choose an artist:</label>
+          <fieldset>
+          <label htmlFor="artistChoice">Search for an artist:</label>
           <input 
             type="text" 
             id="artistChoice" 
+            className="artistChoice"
             value={userInput} 
             onChange={handleChange}
-            placeholder="Taylor Swift, Coldplay, Doja Cat, BTS, Lil Nas X..."
+            placeholder="e.g. Taylor Swift, Coldplay, Doja Cat, Lil Nas X..."
           />
-          <label htmlFor="numOfSongs">How many songs would you like?</label>
-          <select 
-            name="numOfSongs" 
-            id="numOfSongs" 
-            onChange={handleUserChoice} 
-            value={userChoice}
-          >
-            <option value="placeholder" disabled>Pick one:</option>
-            <option value="5">Five</option>
-            <option value="10">Ten</option>
-            <option value="20">Twenty</option>
-            <option value={Math.ceil(Math.random() * 20)} aria-label="picks a random number between 1 and 20">Surprise me!</option>
-          </select>
+          </fieldset>
+          <fieldset>
+            <label htmlFor="numOfSongs">How many songs would you like?</label>
+            <select 
+              name="numOfSongs" 
+              id="numOfSongs" 
+              onChange={handleUserChoice} 
+              value={userChoice}
+            >
+              <option value="placeholder" disabled>Pick one:</option>
+              <option value="5">Five</option>
+              <option value="10">Ten</option>
+              <option value="20">Twenty</option>
+              <option value={Math.ceil(Math.random() * 20)} aria-label="picks a random number between 1 and 20">Surprise me!</option>
+            </select>
+          </fieldset>
           <button>Submit</button>
         </form>
 

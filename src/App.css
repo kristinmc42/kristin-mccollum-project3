@@ -37,10 +37,15 @@ a {
 /* header styles */
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   background-color: royalblue;
   height: 10vh;
+}
+
+header .wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header p{
@@ -59,7 +64,6 @@ header button{
 
 /* main styles */
 main {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,8 +71,9 @@ main {
   background-color: rgb(237, 160, 82);
 }
 
+
 main p{
-  font-size: clamp(1rem, 2.7vw, 6rem);;
+  font-size: clamp(1rem, 2vw, 3rem);
   padding: 10px;
 }
 
@@ -76,9 +81,9 @@ main button {
   width: 200px;
   background-color: antiquewhite;
   color: navy;
-  font-size: clamp(1.3rem, 2.5vw, 4rem);
+  font-size: clamp(1.3rem, 2vw, 4rem);
   font-weight: bold;
-  padding: 10px;
+  padding: 10px 5px;
   border: 5px double rgba(0, 0, 128, 0);
   border-radius: 13px;
   transition:  .7s;
@@ -92,13 +97,13 @@ main button:active {
 }
 
 main h2 {
-  font-size: clamp(1.7rem, 4vw, 4rem);
+  font-size: clamp(1.7rem, 3vw, 3.2rem);
   padding-top: 0;
   padding-bottom: 1rem;
 }
 
 main h3{
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
   padding-top: 1.3rem;
   padding-bottom: .3rem;
 }
@@ -110,7 +115,7 @@ main ul{
 /*  intro styles */
 h1 {
   font-family: 'Monoton', cursive;
-  font-size: clamp(2.4rem, 5vw, 8rem);
+  font-size: clamp(2.4rem, 4vw, 8rem);
   padding: 2.5rem .2rem 1.6rem .2rem;
   
 }
@@ -145,33 +150,42 @@ h1 {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  font-size: clamp(1.7rem, 3.5vw, 4rem);
+  font-size: clamp(1.7rem, 3vw, 4rem);
+}
+
+.partOne fieldset {
+  border: none;
 }
 
 .partOne form input,
 .partOne form select{
   width: 95%;
-  min-width: 290px;
+  min-width: 236px;
+  max-width: 540px;
   height: 2rem;
   background-color: papayawhip;
   text-align: center;
   line-height: 2rem;
-  margin: 2rem .5rem;
+  margin: 2rem 0;
   border-radius: 10px;
-  font-size: clamp(1.3rem, 2.5vw, 4rem);
+  font-size: clamp(1.3rem, 2vw, 4rem);
+  padding: .3em;
+}
+.partOne form .artistChoice {
+  max-width: 800px;
 }
 
-.partOne form select {
-  width: 50%;
-}
+/* .partOne form select {
+  width: 90%;
+} */
 
 .partOne form button {
-  margin-bottom: 1.7rem;
+  font-size: clamp(1.3rem, 2vw, 4rem);
 }
 
 /* error message - p */
 .errorMessage {
-  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-size: clamp(1.6rem, 2.5vw, 3rem);
   padding-top: .5rem;
 }
 
@@ -203,7 +217,7 @@ h1 {
 
 /* reset button */
 .reset{
-  min-width: 250px;
+  min-width: 225px;
   width: 40%;
   font-size: clamp(1rem, 2vw, 4rem);
   margin: 2rem 0;
@@ -222,16 +236,20 @@ footer {
 
 footer p, button{
   text-align: center;
-  font-size: clamp(.8rem, 2.5vw, .8rem);
+  font-size: clamp(.7rem, 2vw, .8rem);
   font-weight: bold;
-  padding: 7px;
+  padding: 4px;
+}
 
+.credits {
+  display: flex;
+  justify-content: center;
 }
 .footerLinks{
   color: rgb(4, 4, 123);
   background-color: royalblue;
   border: none;
-  padding: 0 7px;
+  padding: 0 6px;
   transition: .8s;
 }
 .footerLinks:hover,
@@ -241,18 +259,21 @@ footer p, button{
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media screen and (max-width: 429px){
+  .credits {
+    flex-direction: column;
   }
 }
 
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width:394px){
+  .wrapper {
+    width: 95%;
   }
-  to {
-    transform: rotate(360deg);
+
+  header p{
+    padding-left: 0;
+  }
+  footer {
+    overflow: hidden;
   }
 }

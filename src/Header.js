@@ -1,8 +1,10 @@
 function Header (){
   return(
     <header>
-      <p>Song Selector</p>
-      <button>Sign in</button>
+      <div className="wrapper">
+        <p>Song Selector</p>
+        <img src="https://img.icons8.com/ios-filled/50/000000/music-album.png" alt="icon of record player"/>
+      </div>
     </header>
   )
 }

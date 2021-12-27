@@ -8,9 +8,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 
-function GetMoreSongs({artist}){
-  const apiKey = "55a0c662e159f9a95c530a23f4af3da8";
-
+function GetSimilarArtists({artist}){
+ 
   // initialize state for similar artist array and show similar artists
   const [similarArtists, setSimilarArtists] = useState([]);
   const [showSimilarArtistNames, setShowSimilarArtistNames] = useState(false);
@@ -22,7 +21,7 @@ function GetMoreSongs({artist}){
         params: {
           format: "json",
           method: "artist.getsimilar",
-          api_key: apiKey,
+          api_key: `${process.env.REACT_APP_API_KEY}`,
           artist,
           autocorrect: [0 | 1]
         }
@@ -97,4 +96,4 @@ function GetMoreSongs({artist}){
 }
 
 
-export default GetMoreSongs;
+export default GetSimilarArtists;

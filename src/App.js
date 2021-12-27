@@ -22,35 +22,37 @@ function App() {
 
   return (
     <>
-    <Header />
-    <main className="App">
-      <section className="intro wrapper">
-        {showIntro ?
-        <>
-          <h1>Song Selector</h1>
-          <p>Tired of listening to the same songs by your favourite artists?</p>
-          <p>Wondering what were some of the hits by that band that you remember from way back?</p>
-          <p>Wish someone would pick some random songs for you?</p>
-          <p>You've come to the right place!</p>
-          <button onClick={handleClick} className="introButton">Let's get started!</button>
-        </>
-        : null
-        }
-      </section>
+      <Header />
+      <main className="App">
+        <div className='wrapper'>
+          <section className="intro wrapper">
+            {showIntro ?
+            <>
+              <h1>Song Selector</h1>
+              <p>Tired of listening to the same songs by your favourite artists?</p>
+              <p>Wondering what were some of the hits by that band that you remember from way back?</p>
+              <p>Wish someone would pick some random songs for you?</p>
+              <p>You've come to the right place!</p>
+              <button onClick={handleClick} className="introButton">Let's get started!</button>
+            </>
+            : null
+          }
+          </section>
 
-      <section className="partOne wrapper">
-        {
-          showArtistForm
-          ?
-          <>
-            <h2>Let's find you some tunes! </h2>
-            <ArtistForm />
-          </>
-          : null
-        }
-      </section>
-    </main>
-    <Footer/>
+          <section className="partOne wrapper">
+            {
+              showArtistForm
+              ?
+              <>
+                <h2>Let's find you some tunes! </h2>
+                <ArtistForm />
+              </>
+              : null
+            }
+          </section>
+        </div>
+      </main>
+      <Footer/>
     </>
   );
 }
