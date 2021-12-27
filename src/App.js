@@ -10,6 +10,7 @@ import ArtistForm from './ArtistForm';
 
 
 function App() {
+  require('dotenv').config();
    // initialize state for intro section and artist form 
   const [showIntro, setShowIntro] = useState(true);
   const [showArtistForm, setShowArtistForm] = useState(false);
